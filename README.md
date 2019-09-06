@@ -1,5 +1,7 @@
 # MY Navigation
 
+[![](https://data.jsdelivr.com/v1/package/gh/jokin1999/my-navigation/badge)](https://www.jsdelivr.com/package/gh/jokin1999/my-navigation)
+
 一个轻量级自动根据目录动态生成导航的PHP程序，一个文件创造一整个导航。
 
 ![Preview](./preview.png)
