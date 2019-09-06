@@ -34,3 +34,11 @@ cp ./.own_conf.example ./.own_conf
 
 - 拷贝`.own_navi.example`文件到需要导航的文件夹并命名为`.own_navi`
 - 修改`.own_navi`
+
+## 鸣谢
+
+界面借鉴：[MikuTools](https://github.com/Ice-Hazymoon/MikuTools)
+
+## LICENSE
+
+MIT LICENSE
