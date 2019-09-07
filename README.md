@@ -22,7 +22,7 @@
 
 ## 快速安装
 
-- 下载[nav.php](https://cdn.jsdelivr.net/gh/jokin1999/my-navigation/nav.php)至站点根目录
+- 下载[nav.php](https://cdn.jsdelivr.net/gh/jokin1999/my-navigation@latest/nav.php)至站点根目录
 
 ## 快速配置
 
