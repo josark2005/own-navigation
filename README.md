@@ -22,17 +22,29 @@
 
 ## 快速安装
 
-- 下载[nav.php](https://cdn.jsdelivr.net/gh/jokin1999/my-navigation@latest/nav.php)至站点根目录
-
-## 快速配置
+- 下载[nav.php](https://raw.githubusercontent.com/jokin1999/my-navigation/master/nav.php)至站点根目录
 
 ```bash
+wget https://raw.githubusercontent.com/jokin1999/my-navigation/master/nav.php
+```
+
+## 配置
+
+```bash
+wget https://raw.githubusercontent.com/jokin1999/my-navigation/master/.own_conf.example
 cp ./.own_conf.example ./.own_conf
 ```
 
 修改`.own_conf`文件即可
 
 ## 自定义导航名称
+
+
+```bash
+cd 子目录
+wget https://raw.githubusercontent.com/jokin1999/my-navigation/master/.own_navi.example
+cp ./.own_navi.example ./.own_navi
+```
 
 - 拷贝`.own_navi.example`文件到需要导航的文件夹并命名为`.own_navi`
 - 修改`.own_navi`
