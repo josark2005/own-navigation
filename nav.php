@@ -1,14 +1,79 @@
 <?php
 // 版本信息
-const NAV_VERSION = '1.0.1';
+const NAV_VERSION = '1.1.0';
 
 // 设置文件最低兼容版本
 const NAV_CONF_VERSION = 1;
 
+// 设置基础文件下载地址
+const URL_NAV_OL = 'https://raw.githubusercontent.com/jokin1999/my-navigation/'.NAV_VERSION.'/';
+const URL_NAV_OL_CDN = 'https://cdn.jsdelivr.net/gh/jokin1999/my-navigation@'.NAV_VERSION.'/';
+
+// 检测运行模式
+define('IS_CLI', php_sapi_name() == 'cli');
+
 // 读取设置
 $GLOBALS['config'] = @parse_ini_file('./.own_conf');
+// 不存在设置文件停止前端访问
 if (!$GLOBALS['config']) {
-  exit('请先在导航根目录创建 .own_conf 配置文件，可参照 .own_conf.example 进行配置。');
+  if (IS_CLI) {
+    // 非设置模式提示
+    if (($argv[1] ?? null) != 'dc') {
+      echo "[NAV_ERROR]配置文件缺失，使用 php " . basename(__FILE__) . " dc 下载配置或恢复默认配置";
+    }
+  }else{
+    exit('配置文件缺失，参考：<a href="https://github.com/jokin1999/my-navigation#%E9%85%8D%E7%BD%AE">配置MY Navigation</a>');
+  }
+}else{
+  $conf_ver = $GLOBALS['config']['CONF_VERSION'] ?? 0;
+  // 配置文件版本过低
+  if ($conf_ver < NAV_CONF_VERSION) {
+    exit('当前配置文件（.own_conf）版本不满足当前程序要求的最低版本，可以使用 php '. __DIR__ . 'dc 下载默认配置（会覆盖原有配置）');
+  }
+}
+
+// 命令行模式
+if (IS_CLI) {
+  $method = $argv[1] ?? null;
+  if ($method == null || $method == 'help') {
+    echo 'php '.basename(__FILE__).' [COMMAND]'.PHP_EOL;
+    echo '    dc          download default configuration file for navigation'.PHP_EOL;
+    echo '    dces        download default configuration file for each subfolder of navigation'.PHP_EOL;
+    echo PHP_EOL;
+    echo 'GitHub          https://github.com/jokin1999/my-navigation';
+  }
+
+  // download config
+  if ($method == 'dc') {
+    // 检查文件是否可写
+    if (!is_writable('./')) {
+      exit('目录'. __DIR__ .'无法写入文件');
+    }
+    echo '正在获取默认配置文件...' . PHP_EOL;
+    $own_conf = getOnlineFile('.own_conf.example');
+    if ($own_conf) {
+      file_put_contents('./.own_conf', $own_conf);
+      echo '文件写入完成，编辑'. __DIR__. '/.own_conf 文件以自定义配置';
+    }else{
+      exit('获取默认配置文件失败，请稍候再试...');
+    }
+  }
+
+  // download config of each subfolder
+  if ($method == 'dces') {
+    // 检查文件是否可写
+    if (!is_writable('./')) {
+      exit('目录'. __DIR__ .'无法写入文件');
+    }
+    echo '正在获取默认配置文件...' . PHP_EOL;
+    $own_conf = getOnlineFile('.own_navi.example');
+    if ($own_conf) {
+      file_put_contents('./.own_navi.example', $own_conf);
+      echo '文件写入完成！'.PHP_EOL.'复制'. __DIR__. '/.own_navi.example 至子目录中并命名为 .own_navi 以自定义配置';
+    }else{
+      exit('获取默认配置文件失败，请稍候再试...');
+    }
+  }
 }
 
 // 获取合法目录
@@ -17,6 +82,38 @@ $dirs = getDirs();
 // 读取配置
 if (c('NAV_TRY_READ_CONF') == 1) {
   $dirs = getConf($dirs);
+}
+
+/**
+ * 获取文件
+ * @param  string $filename
+ * @param  bool   $use_cdn
+ * @param  bool   $try_again
+ * @return string|bool
+ */
+function getOnlineFile(string $filename, bool $use_cdn = true, bool $try_again = true) {
+  $url = ($use_cdn === true ? URL_NAV_OL_CDN : URL_NAV_OL) . $filename;
+  echo '文件获取地址：'. $url . PHP_EOL;
+  $ch = curl_init($url);
+  curl_setopt($ch, CURLOPT_HEADER, FALSE);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+  $res = curl_exec($ch);
+  $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  if ($res && $httpCode == 200) {
+    echo '获取文件成功！' . PHP_EOL;
+    return $res;
+  }else{
+    // 不使用cdn再次尝试
+    if ($try_again === true) {
+      echo '获取失败，使用原地址再次尝试...' . PHP_EOL;
+      return getOnlineFile($filename, false, false);
+    }else{
+      return false;
+    }
+  }
 }
 
 /**
@@ -83,6 +180,7 @@ function ec(string $key) {
   echo c($key);
 }
 ?>
+<?php if(!IS_CLI): ?>
 <!doctype html>
 <html lang="zh-cn">
   <head data-n-head="">
@@ -183,3 +281,4 @@ function ec(string $key) {
 
   </body>
 </html>
+<?php endif; ?>

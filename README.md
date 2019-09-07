@@ -12,7 +12,7 @@
 
 ## 文件结构
 
-- `nav.php` 导航程序
+- `nav.php` 导航程序（重命名为`index.php`可设置为主页）
 - `.own_conf.example` 主配置文件案例
 - `.own_navi.example` 自定义导航信息配置
 
@@ -26,28 +26,41 @@
 
 ```bash
 wget https://raw.githubusercontent.com/jokin1999/my-navigation/master/nav.php
+# 下载配置文件(download configuration file)
+php nav.php dc
+# 下载子目录的配置文件(download configuration file)
+php nav.php dces
 ```
+
+- 可根据需要修改`nav.php`为`index.php`（设为主页）
+- 设为主页后`php nav.php`命令需要修改为`php index.php`即可调用
 
 ## 配置
 
 ```bash
-wget https://raw.githubusercontent.com/jokin1999/my-navigation/master/.own_conf.example
-cp ./.own_conf.example ./.own_conf
+# 下载配置文件(download configuration file for navigation)
+php nav.php dc
+# 编辑 .own_conf
 ```
-
-修改`.own_conf`文件即可
 
 ## 自定义导航名称
 
 
 ```bash
-cd 子目录
-wget https://raw.githubusercontent.com/jokin1999/my-navigation/master/.own_navi.example
-cp ./.own_navi.example ./.own_navi
+# 下载子目录的配置文件(download configuration file for each subfolder of navigation)
+php nav.php dces
+# 复制 .own_navi.example 到需要自定义设置的子文件夹并重命名为 .own_navi
+cp ./.own_navi.example ./[your_subfolder]/.own_navi
+# 编辑 ./[your_subfolder]/.own_navi
 ```
 
-- 拷贝`.own_navi.example`文件到需要导航的文件夹并命名为`.own_navi`
-- 修改`.own_navi`
+## 命令行模式
+```bash
+php nav.php [COMMAND]
+    dc      下载配置文件
+    dces    下载子目录的配置文件
+```
+
 
 ## 鸣谢
 
