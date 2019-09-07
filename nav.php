@@ -1,6 +1,6 @@
 <?php
 // 版本信息
-const NAV_VERSION = '1.0.0';
+const NAV_VERSION = '1.0.1';
 
 // 设置文件最低兼容版本
 const NAV_CONF_VERSION = 1;
@@ -161,10 +161,10 @@ function ec(string $key) {
             </div>
           </li>
           <li>
-            界面借鉴：<a herf="https://github.com/Ice-Hazymoon/MikuTools" target="_blank">MikuTools</a>
+            界面借鉴：<a href="https://github.com/Ice-Hazymoon/MikuTools" target="_blank">MikuTools</a>
           </li>
           <li>
-            项目地址：<a href="https://github.com/jokin1999/my-navagation">jokin1999/my-navagation</a>
+            项目地址：<a href="https://github.com/jokin1999/my-navagation" target="_blank">jokin1999/my-navagation</a>
           </li>
           <li>导航版本：<?php ec('NAV_VERSION'); ?> / v<?php ec('NAV_CONF_VERSION'); ?></li>
           <li>配置版本：v<?php ec('CONF_VERSION'); ?></li>

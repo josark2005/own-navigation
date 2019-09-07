@@ -1,1 +1,8 @@
-.own_conf
+*
+!.gitignore
+!nav.php
+!LICENSE
+!.own_conf.example
+!.own_navi.example
+!preview.png
+!README.md
