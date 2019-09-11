@@ -5,7 +5,7 @@
 
 
 # 名称
-TITLE="子目录显示名称"
+TITLE=NO
 
 # 标记 hot vip new recommend
 MARK=new

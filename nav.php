@@ -1,6 +1,6 @@
 <?php
 // 版本信息
-const NAV_VERSION = '1.2.0';
+const NAV_VERSION = '1.2.1';
 
 // 配置文件最低兼容版本
 const NAV_CONF_VERSION_OLDEST = 1;
@@ -88,6 +88,13 @@ if (c('NAV_TRY_READ_CONF') == 1) {
   $dirs = getConf($dirs);
 }
 
+// 清理导航列表
+foreach ($dirs as $group => $dir) {
+  if (count($dirs[$group]) <= 0) {
+    unset($dirs[$group]);
+  }
+}
+
 /**
  * 获取文件
  * @param  string $filename
@@ -142,6 +149,9 @@ function getConf(array $dirs) : array {
             unset($dirs[c('NAV_DEFAULT_GROUP', '默认分组')][$dir]);
           }
           foreach ($confs as $key => $value) {
+            if ($key === 'TITLE' && $value === '') {
+              $value = $dir;
+            }
             $dirs[$cur_group][$dir][strtolower($key)] = $value;
           }
         }
@@ -183,7 +193,7 @@ function c(string $key, $default = false) {
   if (isset($GLOBALS['config'][$key])) {
     return $GLOBALS['config'][$key];
   }else{
-    return defined($key) ? constant($key) : false;
+    return defined($key) ? constant($key) : $default;
   }
 }
 
