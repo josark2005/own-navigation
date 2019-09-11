@@ -8,7 +8,7 @@
 NAV_NAME="MY Navigation"
 
 # 子标题
-NAV_SUBTITLE="Jokin的导航"
+NAV_SUBTITLE="我的导航"
 
 # 关键词
 NAV_KEYWORDS="轻量级导航,动态导航,导航,自动导航,在线导航,导航模板,PHP导航"
@@ -20,9 +20,14 @@ NAV_DESCRIPTION="一个轻量级自动根据目录动态生成导航的PHP程序
 NAV_WELCOME_TITLE="MY Navigation"
 NAV_WELCOME_CONTENT="MY Navigation,一个轻量级自动根据目录动态生成导航的PHP程序"
 
-# 是否尝试读取独立配置（默认读取）
+# 尝试读取独立配置（默认YES）
 NAV_TRY_READ_CONF=YES
 
+# 默认分组名称
+NAV_DEFAULT_GROUP="默认分组"
+
+# 是否开启分组（默认YES，开启NAV_TRY_READ_CONF生效）
+NAV_ALLOW_GROUP=YES
 
 # ---------------------------------------------------
 # 以下内容不建议非专业用户修改
@@ -30,4 +35,4 @@ NAV_TRY_READ_CONF=YES
 # ---------------------------------------------------
 
 # 配置文件版本
-CONF_VERSION=1
+CONF_VERSION=2
