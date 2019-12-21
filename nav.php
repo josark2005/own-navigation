@@ -39,7 +39,8 @@ if (!$GLOBALS['config']) {
 // 命令行模式
 if (IS_CLI) {
   $method = $argv[1] ?? null;
-  if ($method == null || $method == 'help') {
+  define('METHOD', $method);
+  if (METHOD == null || METHOD == 'help') {
     echo 'php '.basename(__FILE__).' [COMMAND]'.PHP_EOL;
     echo '    dc          download default configuration file for navigation'.PHP_EOL;
     echo '    dces        download default configuration file for each subfolder of navigation'.PHP_EOL;
@@ -48,7 +49,7 @@ if (IS_CLI) {
   }
 
   // download config
-  if ($method == 'dc') {
+  if (METHOD == 'dc') {
     // 检查文件是否可写
     if (!is_writable('./')) {
       exit('目录'. __DIR__ .'无法写入文件');
@@ -64,7 +65,7 @@ if (IS_CLI) {
   }
 
   // download config of each subfolder
-  if ($method == 'dces') {
+  if (METHOD == 'dces') {
     // 检查文件是否可写
     if (!is_writable('./')) {
       exit('目录'. __DIR__ .'无法写入文件');
@@ -78,6 +79,8 @@ if (IS_CLI) {
       exit('获取默认配置文件失败，请稍候再试...');
     }
   }
+}else{
+  define('METHOD', NULL);
 }
 
 // 获取合法目录
@@ -206,7 +209,13 @@ function ec(string $key) {
   echo c($key);
 }
 ?>
-<?php if(!IS_CLI): ?>
+<?php if(!IS_CLI || METHOD === 'static'): ?>
+<?php
+  // 缓冲区处理
+  if (METHOD === 'static') {
+    ob_start();
+  }
+?>
 <!doctype html>
 <html lang="zh-cn">
   <head data-n-head="">
@@ -314,3 +323,10 @@ function ec(string $key) {
   </body>
 </html>
 <?php endif; ?>
+<?php
+if (METHOD === 'static') {
+  $content = ob_get_contents();
+  file_put_contents('./index.html', $content);
+  ob_clean();
+}
+?>

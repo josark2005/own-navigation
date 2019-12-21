@@ -5,7 +5,7 @@
 
 
 # 名称（标题）
-NAV_NAME="MY Navigation"
+NAV_NAME="OWN Navigation"
 
 # 子标题
 NAV_SUBTITLE="我的导航"
@@ -17,8 +17,8 @@ NAV_KEYWORDS="轻量级导航,动态导航,导航,自动导航,在线导航,导�
 NAV_DESCRIPTION="一个轻量级自动根据目录动态生成导航的PHP程序"
 
 # 欢迎词
-NAV_WELCOME_TITLE="MY Navigation"
-NAV_WELCOME_CONTENT="MY Navigation,一个轻量级自动根据目录动态生成导航的PHP程序"
+NAV_WELCOME_TITLE="OWN Navigation"
+NAV_WELCOME_CONTENT="OWN Navigation,一个轻量级自动根据目录动态生成导航的PHP程序"
 
 # 尝试读取独立配置（默认YES）
 NAV_TRY_READ_CONF=YES

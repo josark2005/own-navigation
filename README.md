@@ -1,4 +1,4 @@
-# MY Navigation
+# OWN Navigation
 
 [![](https://data.jsdelivr.com/v1/package/gh/jokin1999/my-navigation/badge)](https://www.jsdelivr.com/package/gh/jokin1999/my-navigation)
 
@@ -65,8 +65,8 @@ cp ./.own_navi.example ./[your_subfolder]/.own_navi
 php nav.php [COMMAND]
     dc      下载配置文件
     dces    下载子目录的配置文件
+    static  在根目录生成静态的 index.html 文件
 ```
-
 
 ## 鸣谢
 
