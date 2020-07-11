@@ -34,9 +34,9 @@
 
 ```bash
 wget https://raw.githubusercontent.com/jokin1999/my-navigation/master/nav.php
-# 下载配置文件(download configuration file)
+# 下载配置文件(download default configuration file)
 php nav.php dc
-# 下载子目录的配置文件(download configuration file)
+# 下载子目录的配置文件(download default configuration file for each subfolder of navigation)
 php nav.php dces
 ```
 
